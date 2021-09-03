@@ -2,12 +2,20 @@ from django.shortcuts import render
 
 
 def main(request):
-    return render(request, 'mainapp/index.html')
+    data = {'title': 'магазин'}
+    return render(request, 'mainapp/shop.html', data)
 
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+    data = {'title': 'каталог'}
+    return render(request, 'mainapp/catalog.html', data)
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html')
+    data = {'title': 'контакты'}
+    return render(request, 'mainapp/contact.html', data)
+
+
+# def temp(request):
+#     return render(request, 'mainapp/temp1.html')
+
