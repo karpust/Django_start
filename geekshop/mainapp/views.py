@@ -1,21 +1,27 @@
 from django.shortcuts import render
+from mainapp.models import Product
 
 
-def main(request):
-    data = {'title': 'магазин'}
-    return render(request, 'mainapp/shop.html', data)
+def main(request, pk=None):
+    title = 'магазин'
+    products = Product.objects.all()
+    content = {'title': title, 'products': products}
+    print(pk)
+    return render(request, 'mainapp/shop.html', content)
 
 
-def products(request):
-    data = {'title': 'каталог'}
-    return render(request, 'mainapp/catalog.html', data)
+def products(request, pk=None):
+    title = 'каталог'
+    products = Product.objects.all()
+    content = {'title': title, 'products': products}
+    print(pk)
+    return render(request, 'mainapp/catalog.html', content)
 
 
 def contact(request):
-    data = {'title': 'контакты'}
-    return render(request, 'mainapp/contact.html', data)
+    title = 'контакты'
+    content = {'title': title}
+    return render(request, 'mainapp/contact.html', content)
 
 
-# def temp(request):
-#     return render(request, 'mainapp/temp1.html')
 
