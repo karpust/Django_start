@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact/', mainapp.contact, name='contact'),
     path('products/', include('mainapp.urls', namespace='products')),  # это есть проброс урла
+    path('auth/', include('authapp.urls', namespace='auth')),
 
 ]
 
