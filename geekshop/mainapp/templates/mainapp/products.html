@@ -2,20 +2,10 @@
 {% load static %}
 
 {% block content %}
-		<div class="hero-white">
-			<div class="header clearfix">
-				{% block menu %}
-                {% include 'mainapp/includes/inc_menu.html' %}
-                {% endblock %}
-				<a href="#" class="search"></a>
-                <a href="#" class="basket"></a>
-			</div>
-		</div>
-
 		<div class="details">
 			<div class="links clearfix">
 				<ul class="links-menu">
-					<li><a href="{% url 'products:shop' %}" class="active">все</a></li>
+					<li><a href="{% url 'products:index' %}" class="active">все</a></li>
 					<li><a href="#">дом</a></li>
 					<li><a href="#">офис</a></li>
 					<li><a href="#">модерн</a></li>

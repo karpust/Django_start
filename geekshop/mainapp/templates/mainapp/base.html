@@ -20,6 +20,13 @@
 
 <body>
     <div class="container">
+        {% block menu %}
+            <div class="hero-white">
+                <div class="header clearfix">
+                    {% include 'mainapp/includes/inc_menu.html' %}
+                </div>
+            </div>
+        {% endblock %}
         {% block content %}
         {% endblock %}
     </div>
@@ -50,12 +57,6 @@
             <a href="#" class="social4"></a>
         </div>
         <p class="small">Положения &amp; Условия  /  Конфиденциальность &amp; Cookies</p>
-<!--            <div class="text-footer">-->
-<!--                <h3>контакты</h3>-->
-<!--            </div>-->
-<!--            <div class="text-footer">-->
-<!--                <h3>полезная информация</h3>-->
-<!--            </div>-->
         </div>
     {% endblock %}
 
