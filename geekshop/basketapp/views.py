@@ -12,6 +12,7 @@ from django.http import JsonResponse
 
 @login_required
 def basket_edit(request, pk, quantity):
+    # Чтобы контроллер работал только для запросов, переданных методом AJAX:
     if request.is_ajax():
         quantity = int(quantity)
         new_basket_item = Basket.objects.get(pk=int(pk))
