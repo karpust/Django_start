@@ -70,6 +70,9 @@ html, body {
 	font-weight: 700;
 	border-bottom: 3px solid #212121;
 }
+.some_record .not_active {
+	opacity: 0.5;
+}
 
 .search {
 	display: block;

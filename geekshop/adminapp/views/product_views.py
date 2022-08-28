@@ -14,7 +14,7 @@ def product_create(request, pk):
         product_form = ProductEditForm(request.POST, request.FILES)
         if product_form.is_valid():
             product_form.save()
-            return HttpResponseRedirect(reverse('admin:products', pk))
+            return HttpResponseRedirect(reverse('admin:products', args=[category.pk]))
     else:
         product_form = ProductEditForm(initial={'category': category})
     content = {'title': title,

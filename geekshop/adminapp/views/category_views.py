@@ -13,7 +13,7 @@ def category_create(request):
             new_category.save()
             return HttpResponseRedirect(reverse('admin:categories'))
     else:
-        new_category = ProductCategory()
+        new_category = ProductCategoryEditForm()
     content = {
         'title': title,
         'update_form': new_category
@@ -39,7 +39,7 @@ def category_update(request, pk):
         edit_form = ProductCategoryEditForm(request.POST, request.FILES, instance=category)
         if edit_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('admin:category_update'))
+            return HttpResponseRedirect(reverse('admin:category_update', args=[category.pk]))
     else:
         edit_form = ProductCategoryEditForm(instance=category)
 
