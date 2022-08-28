@@ -8,7 +8,8 @@ import random
 def main(request):
     title = 'магазин'
     products = Product.objects.all()
-    content = {'title': title, 'products': products}
+    basket = get_basket(request.user)
+    content = {'title': title, 'products': products, 'basket': basket}
     return render(request, 'mainapp/shop.html', content)
 
 
@@ -31,7 +32,7 @@ def basket(request):
 
     content = {
         'title': title,
-        'basket_items': basket_items,
+        'basket': basket_items,
     }
     return render(request, 'basketapp/basket.html', content)
 
@@ -92,7 +93,10 @@ def products(request, pk=None):
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html')
+    title = 'конакты'
+    basket = get_basket(request.user)
+    content = {'title': title, 'basket': basket}
+    return render(request, 'mainapp/contact.html', content)
 
 
 
