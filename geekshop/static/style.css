@@ -58,7 +58,6 @@ html, body {
 .menu .active {
 	color: #212121;
 	font-weight: 700;
-	border-bottom: 3px solid #212121;
 }
 .menu a:hover {
 	color: #212121;
@@ -858,7 +857,7 @@ td:first-child {
 	padding-left: 360px;
 }
 .links-menu {
-	margin:	27px auto 0px;	
+	margin:	27px auto 0;
 	position: absolute;
 }
 .links-menu li {

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>
         {% block title %}
             {{ title|title }}
         {% endblock %}
     </title>
+
     {% block css %}
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 	    <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
@@ -27,6 +30,7 @@
                 </div>
             </div>
         {% endblock %}
+
         {% block content %}
         {% endblock %}
     </div>
