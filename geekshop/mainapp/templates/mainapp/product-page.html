@@ -9,14 +9,18 @@
     <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
 </head>
 <body>
-    {% for product in products %}
+{% for product in products %}
     <div class="block">
         <p>{{ product.name }}</p>
+        <img src="/static/img/{{ product.image }}" alt="product">
         <p>{{ product.short_desc }}</p>
         <p>{{ product.description }}</p>
         <p>{{ product.price }}</p>
         <p>{{ product.quatity }}</p>
+        <a href="{% url 'basket:add' product.pk %}" class="red-button">
+            заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
     </div>
-    {% endfor %}
+{% endfor %}
 </body>
 </html>

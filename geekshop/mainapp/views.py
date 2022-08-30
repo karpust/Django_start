@@ -8,7 +8,8 @@ from django.shortcuts import get_object_or_404
 def main(request):
     title = 'магазин'
     products = Product.objects.all()
-    content = {'title': title, 'products': products}
+    basket = get_basket(request.user)
+    content = {'title': title, 'products': products, 'basket': basket}
     return render(request, 'mainapp/shop.html', content)
 
 
@@ -41,21 +42,46 @@ def products(request, pk=None):
     content = {
         'title': title,
         'links_menu': links_menu,
-        'same_products': same_products
+        'products': same_products,
+        'basket': basket,
     }
-    return render(request, 'mainapp/products_list.html', content)
+    return render(request, 'mainapp/products.html', content)
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html')
+    title = 'контакты'
+    basket = get_basket(request.user)
+    content = {
+        'title': title,
+        'basket': basket,
+    }
+    return render(request, 'mainapp/contact.html', content)
 
 
 def product(request, pk):
     product = Product.objects.filter(pk=pk)
-    content = {'products': product}
+    basket = get_basket(request.user)
+    content = {'products': product, 'basket': basket}
     return render(request, 'mainapp/product-page.html', content)
 
 
+def basket(request):
+    title = 'корзина'
+    basket_items = Basket.objects.filter(user=request.user). \
+        order_by('product__category')
+
+    content = {
+        'title': title,
+        'basket': basket_items,
+    }
+    return render(request, 'basketapp/basket.html', content)
+
+
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    else:
+        return []
 
 
 

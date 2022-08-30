@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 
 
-@login_required
+@login_required(login_url='/auth/login/')
 def basket_edit(request, pk, quantity):
     if request.is_ajax():
         quantity = int(quantity)
@@ -22,7 +22,7 @@ def basket_edit(request, pk, quantity):
         else:
             new_basket_item.delete()
 
-        basket_items = Basket.objects.filter(user=request.user). \
+        basket_items = Basket.objects.filter(user=request.user).\
             order_by('product__category')
 
         content = {
@@ -35,7 +35,7 @@ def basket_edit(request, pk, quantity):
         return JsonResponse({'result': result})
 
 
-@login_required
+@login_required(login_url='/auth/login/')
 def basket(request):
     title = 'корзина'
     basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
@@ -46,7 +46,7 @@ def basket(request):
     return render(request, 'basketapp/basket.html', content)
 
 
-@login_required
+@login_required(login_url='/auth/login/')
 def basket_add(request, pk):
     if 'login' in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('products:product', args=[pk]))
@@ -62,7 +62,7 @@ def basket_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required
+@login_required(login_url='/auth/login/')
 def basket_remove(request, pk):
     basket_record = get_object_or_404(Basket, pk=pk)
     basket_record.delete()
