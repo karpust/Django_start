@@ -89,8 +89,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_db',   # C:/ProgramData/MySQL/MySQL Server 8.0/Data/django_db',
-        'USER': 'dbadmin',
-        'PASSWORD': '12345',
+        'USER': 'my_dbadmin',
+        'PASSWORD': '52361986',
         # 'HOST': 'localhost',
 
     }
