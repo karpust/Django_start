@@ -3,6 +3,7 @@ from basketapp.models import Basket
 from mainapp.models import Product, ProductCategory
 from django.shortcuts import get_object_or_404
 import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def main(request):
@@ -55,26 +56,37 @@ def get_same_products(hot_product):
     return same_products
 
 
-def products(request, pk=None):
+def products(request, pk=None, page=1):
     title = 'продукты'
-    links_menu = ProductCategory.objects.all()
+    links_menu = ProductCategory.objects.filter(is_active=True)
     basket = get_basket(request.user)
+
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price')
-            category = {'name': 'все'}
+            products = Product.objects.filter(category__is_active=True,
+                                              is_active=True).order_by('price')
+            category = {'pk': 0, 'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
+            products = Product.objects.filter(category__is_active=True,
+                                              is_active=True).order_by('price')
+        paginator = Paginator(products, 2)  # per_page=2
+        try:
+            # page() — позволяет получить содержимое страницы по номеру:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)  # total number of pages
 
         content = {
             'title': title,
             'links_menu': links_menu,
             'category': category,
-            'products': products,
+            'products': products_paginator,
             'basket': basket,
         }
         return render(request, 'mainapp/products_list.html', content)

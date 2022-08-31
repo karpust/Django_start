@@ -25,7 +25,6 @@ def product_create(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
-
 def products(request, pk):
     title = 'админка/продукт'
     category = get_object_or_404(ProductCategory, pk=pk)
