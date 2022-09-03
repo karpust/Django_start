@@ -35,7 +35,6 @@ class ProductCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'админка/создание'
-        # context['category'] = self.object.category.pk  # self.kwargs['pk']
         context['category'] = self.kwargs['pk']
         return context
 

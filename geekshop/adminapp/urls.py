@@ -25,8 +25,10 @@ urlpatterns = [
 
     path('products/', include([
         path('create/category/<int:pk>/', product.ProductCreateView.as_view(), name='product_create'),
-        path('read/category/<int:pk>/', product.ProductListView.as_view(), name='products'),
-        path('read/<int:pk>/', product.ProductDetailView.as_view(), name='product_read'),
+        path('read/category/<int:pk>/', product.ProductListView.as_view(
+            extra_context={'title': 'админка/товары категории'}), name='products'),
+        path('read/<int:pk>/', product.ProductDetailView.as_view(
+            extra_context={'title': 'админка/просмотр товара'}), name='product_read'),
         path('update/category/<int:pk>/', product.ProductUpdateView.as_view(), name='product_update'),
         path('delete/category/<int:pk>/', product.ProductDeleteView.as_view(), name='product_delete'),
     ])),
